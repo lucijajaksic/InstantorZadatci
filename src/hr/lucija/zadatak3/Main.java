@@ -66,7 +66,7 @@ public class Main {
             numberOfCookies=cookiesInTest[j];
             requestedWeight=weightOfTest[j];
             cookieSet=tests.get(j);
-            if (areThereCookiesWeightedM(cookieSet, numberOfCookies, requestedWeight)){
+            if (Recursion.areThereCookiesWeightedM(cookieSet, numberOfCookies, requestedWeight)){
                 System.out.println("Yes");
             }
             else {
@@ -80,17 +80,5 @@ public class Main {
         }
 }
 
-static boolean areThereCookiesWeightedM(int set[],int n, int sum){
-        if (sum==0){
-            return true;
-        }
-        if (sum!=0 && n==0 ){
-            return false;
-        }
-        if (set[n-1]>sum){
-            return areThereCookiesWeightedM(set, (n-1), sum );
-        }
-        return (areThereCookiesWeightedM(set ,(n-1),sum) || areThereCookiesWeightedM(set, (n-1), sum-set[n-1]));
 
-    }
 }
