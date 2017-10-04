@@ -3,6 +3,14 @@ package hr.lucija.zadatak4;
 import java.util.ArrayList;
 
 public class Methods {
+    
+/*
+    Metodi isItPossible predaje se uzlazno sortirana lista lengthsOfCats, broj članova liste lengthsOfCats i 
+    najmanja prihvatljiva duljina Ki.
+    Metoda vraća maksimalan broj mačaka koje Matije može dobiti, a dugačke su barem Ki.
+*/
+    
+    
     public static int isItPossible (ArrayList<Integer> lengthsOfCats, int numberOfCats, int longAtLeast){
         int i=numberOfCats-1;
         int difference;
