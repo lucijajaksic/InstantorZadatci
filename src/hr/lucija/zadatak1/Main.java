@@ -13,42 +13,42 @@ import java.util.Scanner;
  */
 
 public class Main {
-    public static final int MAX_VRIJEDNOST_CLANA_NIZA  = 100000;
-    public static final int MIN_BROJ_TESTOVA  = 1;
-    public static final int MAX_BROJ_TESTOVA  = 10;
-    public static final int MIN_BROJ_CIJELIH_BROJEVA_U_NIZU  = 1;
+    public static final int MAX_ARRAY_VALUE = 100000;
+    public static final int MIN_TESTS_COUNT = 1;
+    public static final int MAX_TESTS_COUNT = 10;
+    public static final int MIN_ARRAY_SIZE = 1;
 
     public static void main(String[] args) {
-        List<int[]> testovi = new ArrayList<>();
-        int brojTestova, brojClanovaUNizu, clanNiza;
+        List<int[]> tests = new ArrayList<>();
+        int numOfTests, arraySize, arrayValue;
         Scanner in = new Scanner(System.in);
 
         try {
-            brojTestova = in.nextInt();
-            while (brojTestova < MIN_BROJ_TESTOVA || brojTestova > MAX_BROJ_TESTOVA) {
+            numOfTests = in.nextInt();
+            while (numOfTests < MIN_TESTS_COUNT || numOfTests > MAX_TESTS_COUNT) {
                 System.out.println("Broj testova mora biti u rasponu od 1 do 10 (uključivo). Upiši opet.");
-                brojTestova = in.nextInt();
+                numOfTests = in.nextInt();
             }
 
 
             //Array jer znamo fiksnu duljinu -> brže, ne dodajemo i ne mičemo elemente u nizu pa nema potrebe za ArrayList
-            for (int i = 0; i < brojTestova; i++) {
-                brojClanovaUNizu = in.nextInt();
-                while (brojClanovaUNizu < MIN_BROJ_CIJELIH_BROJEVA_U_NIZU) {
+            for (int i = 0; i < numOfTests; i++) {
+                arraySize = in.nextInt();
+                while (arraySize < MIN_ARRAY_SIZE) {
                     System.out.println("Broj cijelih brojeva u nizu mora biti veći od 1. Upiši opet.");
-                    brojClanovaUNizu = in.nextInt();
+                    arraySize = in.nextInt();
                 }
-                int[] test = new int[brojClanovaUNizu];
-                for (int j = 0; j < brojClanovaUNizu; j++) {
-                    clanNiza = in.nextInt();
-                    while (clanNiza > MAX_VRIJEDNOST_CLANA_NIZA || clanNiza < 0) {
+                int[] test = new int[arraySize];
+                for (int j = 0; j < arraySize; j++) {
+                    arrayValue = in.nextInt();
+                    while (arrayValue > MAX_ARRAY_VALUE || arrayValue < 0) {
                         System.out.println("Član niza treba biti pozitivan cijeli broj manji od 10^5!");
-                        clanNiza = in.nextInt();
+                        arrayValue = in.nextInt();
                     }
-                    test[j] = clanNiza;
+                    test[j] = arrayValue;
                 }
 
-                testovi.add(test);
+                tests.add(test);
 
             }
         }catch (InputMismatchException e){
@@ -58,21 +58,21 @@ public class Main {
         }
 
 
-        for(int[] test : testovi) {
-            int pomocnaSuma;
-            int minimalnaSuma;
-            int minimalniIndeks = 1;
-            minimalnaSuma = Sume.prefiksSuma(minimalniIndeks, test) + Sume.sufiksSuma(minimalniIndeks, test);
+        for(int[] test : tests) {
+            int helpSum;
+            int minSum;
+            int minIndex = 1;
+            minSum = Sums.prefixSum(minIndex, test) + Sums.sufixSum(minIndex, test);
 
-            for (int i = minimalniIndeks + 1; i <= test.length; i++) {
-                pomocnaSuma = Sume.prefiksSuma(i, test) + Sume.sufiksSuma(i, test);
-                if (pomocnaSuma < minimalnaSuma) {
-                    minimalnaSuma = pomocnaSuma;
-                    minimalniIndeks = i;
+            for (int i = minIndex + 1; i <= test.length; i++) {
+                helpSum = Sums.prefixSum(i, test) + Sums.sufixSum(i, test);
+                if (helpSum < minSum) {
+                    minSum = helpSum;
+                    minIndex = i;
                 }
             }
             System.out.println("Izlaz:");
-            System.out.println(minimalniIndeks);
+            System.out.println(minIndex);
 
         }
     }
